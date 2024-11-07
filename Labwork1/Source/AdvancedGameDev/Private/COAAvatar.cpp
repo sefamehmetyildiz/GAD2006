@@ -18,44 +18,54 @@ ACOAAvatar::ACOAAvatar() :
 	mSpringArm->SetupAttachment(RootComponent);
 
 	mCameraComponent = CreateDefaultSubobject<UCameraComponent>("Camera");
-	mCameraComponent->SetupAttachment(mSpringArm, USpringArmComponent :: SocketName );
+	mCameraComponent->SetupAttachment(mSpringArm, USpringArmComponent::SocketName);
 
-	
+
 }
 
-void ACOAAvatar :: BeginPlay() 
+void ACOAAvatar::BeginPlay()
 {
+	Super::BeginPlay();
 	mCameraComponent->bUsePawnControlRotation = false;
 	mSpringArm->bUsePawnControlRotation = true;
 	bUseControllerRotationYaw = false;
 }
 
-void ACOAAvatar::Tick(float DeltaTime) 
+void ACOAAvatar::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (bRunning || GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Walking)
+	FVector Velocity = GetVelocity();
+	float Speed = Velocity.Size();
+
+	GEngine->AddOnScreenDebugMessage(0, 1, FColor::Cyan, FString::Printf(TEXT("Stamina: %f"), Stamina));
+
+	if (Speed > 0)
 	{
-	
-		Stamina -= StaminaDrainRate * DeltaTime;
+		
+	Stamina -= StaminaDrainRate * DeltaTime;
 		if (Stamina <= 0.0f)
 		{
 			Stamina = 0.0f;
 			bStaminaDrained = true;
-			bRunning = false; 
+			bRunning = false;
 			UpdateMovementParams();
 		}
+		
 	}
 	else
 	{
 
 		Stamina += StaminaGainRate * DeltaTime;
+		bStaminaDrained = false;
+		UpdateMovementParams();
 		if (Stamina >= MaxStamina)
 		{
 			Stamina = MaxStamina;
-			bStaminaDrained = false; 
+			
 		}
 	}
+	
 }
 
 
@@ -68,11 +78,11 @@ void ACOAAvatar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	PlayerInputComponent->BindAxis("Turn", this, &ACharacter::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("LookUp", this, &ACharacter::AddControllerPitchInput);
 
-	PlayerInputComponent->BindAxis("MoveForward", this, &ACOAAvatar:: MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", this, &ACOAAvatar:: MoveRight);
+	PlayerInputComponent->BindAxis("MoveForward", this, &ACOAAvatar::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &ACOAAvatar::MoveRight);
 
-	PlayerInputComponent->BindAction("Jump", EInputEvent ::IE_Pressed ,this, &ACharacter::Jump);
-	PlayerInputComponent->BindAction("Jump", EInputEvent ::IE_Released,this, &ACharacter::StopJumping);
+	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Released, this, &ACharacter::StopJumping);
 
 	PlayerInputComponent->BindAction("Run", EInputEvent::IE_Pressed, this, &ACOAAvatar::RunPressed);
 	PlayerInputComponent->BindAction("Run", EInputEvent::IE_Released, this, &ACOAAvatar::RunReleased);
@@ -80,20 +90,21 @@ void ACOAAvatar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 void ACOAAvatar::RunPressed()
 {
-	bRunning = false;
+	bRunning = true;
 	UpdateMovementParams();
 }
 
 void ACOAAvatar::RunReleased()
 {
-	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+	bRunning = false;
+	UpdateMovementParams();
 }
 
 void ACOAAvatar::MoveForward(float amount)
 {
 	FRotator ControlRotation = GetController()->GetControlRotation();
 	FRotator YawRotation(0.0f, ControlRotation.Yaw, 0.0f);
-	FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis:: X);
+	FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 	AddMovementInput(ForwardDirection, amount);
 	GEngine->AddOnScreenDebugMessage(0, 1, FColor::Cyan, FString::Printf(TEXT("Move Forward: %f"), amount));
 }
@@ -108,18 +119,22 @@ void ACOAAvatar::MoveRight(float amount)
 
 void ACOAAvatar::UpdateMovementParams()
 {
-	if (bStaminaDrained)
+	if (!bStaminaDrained)
 	{
-		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
-	}
-	else if (bRunning)
-	{
-		GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+		if (bRunning)
+		{
+			GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+		}
+		else
+		{
+			GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+		}
 	}
 	else
-	{	
-		GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+	{
+		GetCharacterMovement()->MaxWalkSpeed = 0;
 	}
+	
 }
 
 
