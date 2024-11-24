@@ -1,5 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+//GameManager.h
 #pragma once
 
 #include "CoreMinimal.h"
@@ -69,6 +69,6 @@ public:
 
 private:
 	AUnitBase* ThePlayer;
-	TArray<TShaderRef<Command>> CommandPool;
+	TArray<TSharedPtr<Command>> CommandPool;
 	TSharedPtr<Command> CurrentCommand;
 };

@@ -1,5 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+//GameManager.cpp
 
 #include "GameManager.h"
 #include <TBPlayerController.h>
@@ -33,16 +33,17 @@ void AGameManager::CreateLevelActors(FSLevelInfo& Info)
 bool AGameManager::UndoLastMove()
 {
 	if (CommandPool.Num() > 0) {
-
-		TSharedRef<Command> LastCommand = CommandPool.Pop();
-		LastCommand->Revert();
-		CurrentCommand = nullptr; 
-		UE_LOG(LogTemp, Log, TEXT("Undo successful."));
-		return true;
+		TSharedPtr<Command> LastCommand = CommandPool.Pop(); // TSharedPtr ile pop iþlem yapýyoruz
+		if (LastCommand.IsValid()) {
+			LastCommand->Revert(); // Geri al
+			CurrentCommand = nullptr; // Geçerli komutu sýfýrla
+			UE_LOG(LogTemp, Log, TEXT("Undo successful."));
+			return true; // Baþarýlý geri alma
+		}
 	}
 
 	UE_LOG(LogTemp, Warning, TEXT("No more commands to undo."));
-	return false;
+	return false; // Geri alýnacak komut yok
 }
 
 // Called when the game starts or when spawned

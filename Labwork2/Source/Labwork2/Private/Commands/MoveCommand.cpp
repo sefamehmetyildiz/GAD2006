@@ -1,5 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+// MoveCommand.cpp
 
 #include "MoveCommand.h"
 
@@ -28,5 +28,14 @@ void MoveCommand::Execute() {
 }
 
 void MoveCommand::Revert() {
+	UE_LOG(LogTemp, Warning, TEXT("Reverting MoveCommand..."));
 
+	// Slot'larý buluyoruz (Hedefi kaynak olarak, kaynaðý hedef olarak alýyoruz)
+	AGameSlot* SlotA = AGameGrid::FindSlot(Destination); // Hedef slotu, eski (kaynak) olarak kullan
+	AGameSlot* SlotB = AGameGrid::FindSlot(Source); // Kaynak slotu, eski (hedef) olarak kullan
+
+	AUnitBase* UnitA = SlotA->Unit;
+	check(UnitA); // UnitA'nin null olmadýðýna emin oluyoruz
+	UnitA->AssignToSlot(SlotB); // Birimi eski konumuna (SlotB) taþýyoruz
+	SlotB->SetState(GS_Highlighted); // Eski konumu tekrar vurguluyoruz
 }
