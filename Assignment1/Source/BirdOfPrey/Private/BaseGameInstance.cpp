@@ -2,10 +2,10 @@
 
 #include "BaseGameInstance.h"
 
-void UBaseGameInstance::SetPlayerAgentInfoFor(int PlayerControllerID, FSAgentInfo& info)
+void UBaseGameInstance::SetPlayerAgentInfoFor(int PlayerControllerID, FSAgentInfo& AgentInfo)
 {
-
 }
+
 
 FSAgentInfo& UBaseGameInstance::GetPlayerAgentInfoFor(int PlayerControllerID, bool& Result)
 {
