@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\gad2006\\gad2006\\labwork4\\source\\labwork4\\labwork4.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\gad2006\\gad2006\\labwork4\\intermediate\\build\\win64\\x64\\labwork4editor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.inclorderoldest.h.pch",
+        "Includes": [
+            "c:\\gad2006\\gad2006\\labwork4\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\labwork4\\definitions.labwork4.h",
+            "c:\\gad2006\\gad2006\\labwork4\\source\\labwork4\\labwork4.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

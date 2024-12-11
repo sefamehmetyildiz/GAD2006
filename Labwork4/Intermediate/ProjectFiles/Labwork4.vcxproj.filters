@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="..\..\Labwork4.uproject" />
+    <Filter Include="Source">
+      <UniqueIdentifier>{F31BBDD1-B3E8-3BCC-9652-680E16935819}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\Labwork4.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\Source\Labwork4Editor.Target.cs">
+      <Filter>Source</Filter>
+    </None>
+    <None Include="..\..\.vsconfig" />
+    <Filter Include="Config">
+      <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Config\DefaultEditor.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEditorSettings.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultEngine.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultGame.ini">
+      <Filter>Config</Filter>
+    </None>
+    <None Include="..\..\Config\DefaultInput.ini">
+      <Filter>Config</Filter>
+    </None>
+    <Filter Include="Source\Labwork4">
+      <UniqueIdentifier>{554EB7C4-3E88-3597-92EB-97753B3BA196}</UniqueIdentifier>
+    </Filter>
+    <None Include="..\..\Source\Labwork4\Labwork4.Build.cs">
+      <Filter>Source\Labwork4</Filter>
+    </None>
+    <ClCompile Include="..\..\Source\Labwork4\Labwork4.cpp">
+      <Filter>Source\Labwork4</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Labwork4\Labwork4.h">
+      <Filter>Source\Labwork4</Filter>
+    </ClInclude>
+    <Filter Include="Source\Labwork4\Private">
+      <UniqueIdentifier>{6ECCFF3B-DC32-35E0-9A33-F6447022360C}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Labwork4\Private\NetAvatar.cpp">
+      <Filter>Source\Labwork4\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Labwork4\Private\NetBaseCharacter.cpp">
+      <Filter>Source\Labwork4\Private</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Labwork4\Private\NetBaseCharacter.h">
+      <Filter>Source\Labwork4\Private</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Labwork4\Private\NetGameInstance.cpp">
+      <Filter>Source\Labwork4\Private</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Labwork4\Private\NetGameInstance.h">
+      <Filter>Source\Labwork4\Private</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Labwork4\Private\NetGameMode.cpp">
+      <Filter>Source\Labwork4\Private</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Labwork4\Private\NetGameMode.h">
+      <Filter>Source\Labwork4\Private</Filter>
+    </ClInclude>
+    <Filter Include="Source\Labwork4\Public">
+      <UniqueIdentifier>{35A5E8BD-A7B8-3D83-9338-55B048AF9567}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\Labwork4\Public\NetAvatar.h">
+      <Filter>Source\Labwork4\Public</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
