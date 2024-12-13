@@ -14,6 +14,41 @@ ANetAvatar::ANetAvatar()
 	Camera->SetupAttachment(SpringArm, USpringArmComponent::SocketName);
 }
 
+
+void ANetAvatar::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(ANetAvatar, bIsRunning);
+}
+
+void ANetAvatar::SetRunning(bool bNewRunning)
+{
+	bIsRunning = bNewRunning;
+
+
+	UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
+	if (CharacterMovement)
+	{
+		CharacterMovement->MaxWalkSpeed = bIsRunning ? 600.0f : 300.0f;
+	}
+}
+
+void ANetAvatar::OnRep_IsRunning()
+{
+	SetRunning(bIsRunning);
+}
+
+void ANetAvatar::ServerSetRunning_Implementation(bool bNewRunning)
+{
+	SetRunning(bNewRunning);
+}
+
+bool ANetAvatar::ServerSetRunning_Validate(bool bNewRunning)
+{
+	return true;
+}
+
 void ANetAvatar::BeginPlay()
 {
 	Super::BeginPlay();
@@ -31,7 +66,11 @@ void ANetAvatar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ANetAvatar::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ANetAvatar::MoveRight);
+
+	PlayerInputComponent->BindAction("Run", IE_Pressed, this, &ANetAvatar::StartRunning);
+	PlayerInputComponent->BindAction("Run", IE_Released, this, &ANetAvatar::StopRunning);
 }
+
 
 void ANetAvatar::MoveForward(float Scale)
 {
@@ -47,4 +86,37 @@ void ANetAvatar::MoveRight(float Scale)
 	FRotator YawRotation(0.0f, Rotation.Yaw, 0.0f);
 	FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 	AddMovementInput(ForwardDirection, Scale);
+}
+
+void ANetAvatar::StartRunning()
+{
+	if (HasAuthority())
+	{
+		SetRunning(true);
+	}
+	else
+	{
+		ServerSetRunning(true);
+	}
+}
+
+void ANetAvatar::StopRunning()
+{
+	if (HasAuthority())
+	{
+		SetRunning(false);
+	}
+	else
+	{
+		ServerSetRunning(false);
+	}
+}
+
+void ANetAvatar::Run(float RunSpeed)
+{
+	UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
+	if (CharacterMovement)
+	{
+		CharacterMovement->MaxWalkSpeed = RunSpeed;
+	}
 }

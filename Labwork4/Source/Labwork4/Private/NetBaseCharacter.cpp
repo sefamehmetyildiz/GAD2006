@@ -14,7 +14,8 @@ static wchar_t const* BodyPartNames[] =
 	TEXT("Chest"),
 	TEXT("Hands"),
 	TEXT("Legs"),
-	TEXT("Beard")
+	TEXT("Beard"),
+	TEXT("Eyes")
 };
 
 // Sets default values

@@ -25,10 +25,29 @@ public:
 	UPROPERTY(EditAnywhere)
 	USpringArmComponent* SpringArm;
 
+
+	UPROPERTY(ReplicatedUsing = OnRep_IsRunning)
+	bool bIsRunning;
+
+protected:
+	UFUNCTION()
+	void OnRep_IsRunning();
+
+
+	UFUNCTION(Server, Reliable, WithValidation)
+	void ServerSetRunning(bool bNewRunning);
+
+	void SetRunning(bool bNewRunning);
+
 	virtual void BeginPlay() override;
+
+
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 private:
 	void MoveForward(float Amount);
 	void MoveRight(float Amount);
+	void StartRunning();
+	void StopRunning();
+	void Run(float RunSpeed);
 };

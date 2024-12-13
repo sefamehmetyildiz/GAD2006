@@ -20,10 +20,10 @@ public:
 	UNetGameInstance();
 
 	UFUNCTION(BlueprintCallable)
-	void Host(FString MapName, FSPlayerInfo& PlayerInfo);
+	void Host(FString MapName, FSPlayerInfo PlayerInfo);
 
 	UFUNCTION(BlueprintCallable)
-	void Join(FString Address, FSPlayerInfo& PlayerInfo);
+	void Join(FString Address, FSPlayerInfo PlayerInfo);
 
 	UPROPERTY(BlueprintReadWrite)
 	FSPlayerInfo PlayerInfo;

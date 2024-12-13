@@ -47,6 +47,7 @@ struct Z_Construct_UEnum_Labwork4_EBodyPart_Statics
 		{ "BP_Beard.Name", "EBodyPart::BP_Beard" },
 		{ "BP_Chest.Name", "EBodyPart::BP_Chest" },
 		{ "BP_COUNT.Name", "EBodyPart::BP_COUNT" },
+		{ "BP_Eye.Name", "EBodyPart::BP_Eye" },
 		{ "BP_Face.Name", "EBodyPart::BP_Face" },
 		{ "BP_Hair.Name", "EBodyPart::BP_Hair" },
 		{ "BP_Hands.Name", "EBodyPart::BP_Hands" },
@@ -61,6 +62,7 @@ struct Z_Construct_UEnum_Labwork4_EBodyPart_Statics
 		{ "EBodyPart::BP_Hands", (int64)EBodyPart::BP_Hands },
 		{ "EBodyPart::BP_Legs", (int64)EBodyPart::BP_Legs },
 		{ "EBodyPart::BP_Beard", (int64)EBodyPart::BP_Beard },
+		{ "EBodyPart::BP_Eye", (int64)EBodyPart::BP_Eye },
 		{ "EBodyPart::BP_COUNT", (int64)EBodyPart::BP_COUNT },
 	};
 	static const UECodeGen_Private::FEnumParams EnumParams;
@@ -329,7 +331,7 @@ struct Z_Construct_UFunction_ANetBaseCharacter_ChangeBodyPart_Statics
 	static const UECodeGen_Private::FFunctionParams FuncParams;
 };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UFunction_ANetBaseCharacter_ChangeBodyPart_Statics::NewProp_index_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
-const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_ANetBaseCharacter_ChangeBodyPart_Statics::NewProp_index = { "index", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NetBaseCharacter_eventChangeBodyPart_Parms, index), Z_Construct_UEnum_Labwork4_EBodyPart, METADATA_PARAMS(0, nullptr) }; // 623685964
+const UECodeGen_Private::FEnumPropertyParams Z_Construct_UFunction_ANetBaseCharacter_ChangeBodyPart_Statics::NewProp_index = { "index", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NetBaseCharacter_eventChangeBodyPart_Parms, index), Z_Construct_UEnum_Labwork4_EBodyPart, METADATA_PARAMS(0, nullptr) }; // 3494318627
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UFunction_ANetBaseCharacter_ChangeBodyPart_Statics::NewProp_value = { "value", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(NetBaseCharacter_eventChangeBodyPart_Parms, value), METADATA_PARAMS(0, nullptr) };
 void Z_Construct_UFunction_ANetBaseCharacter_ChangeBodyPart_Statics::NewProp_DirectSet_SetBit(void* Obj)
 {
@@ -555,7 +557,7 @@ struct Z_Construct_UClass_ANetBaseCharacter_Statics
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
-		{ &Z_Construct_UFunction_ANetBaseCharacter_ChangeBodyPart, "ChangeBodyPart" }, // 1685974438
+		{ &Z_Construct_UFunction_ANetBaseCharacter_ChangeBodyPart, "ChangeBodyPart" }, // 1978405503
 		{ &Z_Construct_UFunction_ANetBaseCharacter_ChangeGender, "ChangeGender" }, // 1981528768
 		{ &Z_Construct_UFunction_ANetBaseCharacter_OnRep_PlayerInfoChanged, "OnRep_PlayerInfoChanged" }, // 1909635686
 		{ &Z_Construct_UFunction_ANetBaseCharacter_SubmitPlayerInfoToServer, "SubmitPlayerInfoToServer" }, // 3485851590
@@ -630,7 +632,7 @@ ANetBaseCharacter::~ANetBaseCharacter() {}
 struct Z_CompiledInDeferFile_FID_GAD2006_GAD2006_Labwork4_Source_Labwork4_Private_NetBaseCharacter_h_Statics
 {
 	static constexpr FEnumRegisterCompiledInInfo EnumInfo[] = {
-		{ EBodyPart_StaticEnum, TEXT("EBodyPart"), &Z_Registration_Info_UEnum_EBodyPart, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 623685964U) },
+		{ EBodyPart_StaticEnum, TEXT("EBodyPart"), &Z_Registration_Info_UEnum_EBodyPart, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 3494318627U) },
 	};
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
 		{ FSMeshAssetList::StaticStruct, Z_Construct_UScriptStruct_FSMeshAssetList_Statics::NewStructOps, TEXT("SMeshAssetList"), &Z_Registration_Info_UScriptStruct_SMeshAssetList, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSMeshAssetList), 3726270267U) },
@@ -638,10 +640,10 @@ struct Z_CompiledInDeferFile_FID_GAD2006_GAD2006_Labwork4_Source_Labwork4_Privat
 		{ FSPlayerInfo::StaticStruct, Z_Construct_UScriptStruct_FSPlayerInfo_Statics::NewStructOps, TEXT("SPlayerInfo"), &Z_Registration_Info_UScriptStruct_SPlayerInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FSPlayerInfo), 3242322112U) },
 	};
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_ANetBaseCharacter, ANetBaseCharacter::StaticClass, TEXT("ANetBaseCharacter"), &Z_Registration_Info_UClass_ANetBaseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANetBaseCharacter), 4171830557U) },
+		{ Z_Construct_UClass_ANetBaseCharacter, ANetBaseCharacter::StaticClass, TEXT("ANetBaseCharacter"), &Z_Registration_Info_UClass_ANetBaseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ANetBaseCharacter), 1846449613U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_GAD2006_GAD2006_Labwork4_Source_Labwork4_Private_NetBaseCharacter_h_1983718842(TEXT("/Script/Labwork4"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_GAD2006_GAD2006_Labwork4_Source_Labwork4_Private_NetBaseCharacter_h_378633445(TEXT("/Script/Labwork4"),
 	Z_CompiledInDeferFile_FID_GAD2006_GAD2006_Labwork4_Source_Labwork4_Private_NetBaseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_GAD2006_GAD2006_Labwork4_Source_Labwork4_Private_NetBaseCharacter_h_Statics::ClassInfo),
 	Z_CompiledInDeferFile_FID_GAD2006_GAD2006_Labwork4_Source_Labwork4_Private_NetBaseCharacter_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_GAD2006_GAD2006_Labwork4_Source_Labwork4_Private_NetBaseCharacter_h_Statics::ScriptStructInfo),
 	Z_CompiledInDeferFile_FID_GAD2006_GAD2006_Labwork4_Source_Labwork4_Private_NetBaseCharacter_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_GAD2006_GAD2006_Labwork4_Source_Labwork4_Private_NetBaseCharacter_h_Statics::EnumInfo));
