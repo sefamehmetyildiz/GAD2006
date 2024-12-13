@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Labwork4ModuleRules")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Development")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d28d013ab0ae66d5563143d6c0272762e84da030")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+73016ef71ef3e962fd185ceac7608b10b3d7ed5a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Labwork4ModuleRules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Labwork4ModuleRules")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

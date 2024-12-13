@@ -7,7 +7,7 @@
 
 static UDataTable* SBodyParts = nullptr;
 
-static wchar_t const* BodyPartNames[] =
+static wchar_t* BodyPartNames[][] =
 {
 	TEXT("Face"),
 	TEXT("Hair"),
@@ -133,6 +133,8 @@ void ANetBaseCharacter::ChangeBodyPart(EBodyPart index, int value, bool DirectSe
 		break;
 	case EBodyPart::BP_Legs: PartLegs->SetSkeletalMeshAsset(List->ListSkeletal[CurrentIndex]);
 		break;
+	case EBodyPart::BP_Eye: PartEyes->SetStaticMesh(List->ListStatic[CurrentIndex]);
+		break;
 	}
 }
 
@@ -178,4 +180,5 @@ void ANetBaseCharacter::UpdateBodyParts()
 	ChangeBodyPart(EBodyPart::BP_Hair, 0, false);
 	ChangeBodyPart(EBodyPart::BP_Hands, 0, false);
 	ChangeBodyPart(EBodyPart::BP_Legs, 0, false);
+	ChangeBodyPart(EBodyPart::BP_Eye, 0, false);
 }
