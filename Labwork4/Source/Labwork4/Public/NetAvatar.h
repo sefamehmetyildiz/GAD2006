@@ -49,5 +49,5 @@ private:
 	void MoveRight(float Amount);
 	void StartRunning();
 	void StopRunning();
-	void Run(float RunSpeed);
+	/*void Run(float RunSpeed) const;*/
 };

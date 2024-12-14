@@ -26,12 +26,7 @@ void ANetAvatar::SetRunning(bool bNewRunning)
 {
 	bIsRunning = bNewRunning;
 
-
-	UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
-	if (CharacterMovement)
-	{
-		CharacterMovement->MaxWalkSpeed = bIsRunning ? 600.0f : 300.0f;
-	}
+	GetCharacterMovement()->MaxWalkSpeed = bIsRunning ? 600.0f : 300.0f;
 }
 
 void ANetAvatar::OnRep_IsRunning()
@@ -112,11 +107,10 @@ void ANetAvatar::StopRunning()
 	}
 }
 
-void ANetAvatar::Run(float RunSpeed)
-{
-	UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
-	if (CharacterMovement)
-	{
-		CharacterMovement->MaxWalkSpeed = RunSpeed;
-	}
-}
+//void ANetAvatar::Run(float RunSpeed) const
+//{
+//	if (UCharacterMovementComponent* CharacterMovement = GetCharacterMovement())
+//	{
+//		CharacterMovement->MaxWalkSpeed = RunSpeed;
+//	}
+//}

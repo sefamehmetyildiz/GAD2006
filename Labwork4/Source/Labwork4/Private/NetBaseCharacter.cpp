@@ -7,7 +7,7 @@
 
 static UDataTable* SBodyParts = nullptr;
 
-static wchar_t* BodyPartNames[][] =
+static wchar_t const* BodyPartNames[] =
 {
 	TEXT("Face"),
 	TEXT("Hair"),
@@ -81,9 +81,15 @@ void ANetBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-void ANetBaseCharacter::OnConstruction(FTransform const& Transform)
+
+void ANetBaseCharacter::SubmitPlayerInfoToServer_Implementation(FSPlayerInfo Info)
 {
-	UpdateBodyParts();
+	PartSelection = Info.BodyParts;
+
+	if (HasAuthority())
+	{
+		OnRep_PlayerInfoChanged();
+	}
 }
 
 void ANetBaseCharacter::ChangeBodyPart(EBodyPart index, int value, bool DirectSet)
@@ -100,7 +106,6 @@ void ANetBaseCharacter::ChangeBodyPart(EBodyPart index, int value, bool DirectSe
 	{
 		CurrentIndex = value;
 	}
-
 	else
 	{
 		CurrentIndex += value;
@@ -144,14 +149,28 @@ void ANetBaseCharacter::ChangeGender(bool _isFemale)
 	UpdateBodyParts();
 }
 
-void ANetBaseCharacter::SubmitPlayerInfoToServer_Implementation(FSPlayerInfo Info)
+void ANetBaseCharacter::UpdateBodyParts()
 {
-	PartSelection = Info.BodyParts;
+	ChangeBodyPart(EBodyPart::BP_Face, 0, false);
+	ChangeBodyPart(EBodyPart::BP_Beard, 0, false);
+	ChangeBodyPart(EBodyPart::BP_Chest, 0, false);
+	ChangeBodyPart(EBodyPart::BP_Hair, 0, false);
+	ChangeBodyPart(EBodyPart::BP_Hands, 0, false);
+	ChangeBodyPart(EBodyPart::BP_Legs, 0, false);
+	ChangeBodyPart(EBodyPart::BP_Eye, 0, false);
+}
 
-	if (HasAuthority())
-	{
-		OnRep_PlayerInfoChanged();
-	}
+FSMeshAssetList* ANetBaseCharacter::GetBodyPartList(EBodyPart part, bool isFemale)
+{
+	FString Name = FString::Printf(TEXT("%s%s"), isFemale ? TEXT("Female") : TEXT("Male"),
+	                               BodyPartNames[static_cast<int>(part)]);
+	return SBodyParts ? SBodyParts->FindRow<FSMeshAssetList>(*Name, nullptr) : nullptr;
+}
+
+
+void ANetBaseCharacter::OnConstruction(FTransform const& Transform)
+{
+	UpdateBodyParts();
 }
 
 void ANetBaseCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -163,22 +182,4 @@ void ANetBaseCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 void ANetBaseCharacter::OnRep_PlayerInfoChanged()
 {
 	UpdateBodyParts();
-}
-
-FSMeshAssetList* ANetBaseCharacter::GetBodyPartList(EBodyPart part, bool isFemale)
-{
-	FString Name = FString::Printf(TEXT("%s%s"), isFemale ? TEXT("Female") : TEXT("Male"),
-	                               BodyPartNames[static_cast<int>(part)]);
-	return SBodyParts ? SBodyParts->FindRow<FSMeshAssetList>(*Name, nullptr) : nullptr;
-}
-
-void ANetBaseCharacter::UpdateBodyParts()
-{
-	ChangeBodyPart(EBodyPart::BP_Face, 0, false);
-	ChangeBodyPart(EBodyPart::BP_Beard, 0, false);
-	ChangeBodyPart(EBodyPart::BP_Chest, 0, false);
-	ChangeBodyPart(EBodyPart::BP_Hair, 0, false);
-	ChangeBodyPart(EBodyPart::BP_Hands, 0, false);
-	ChangeBodyPart(EBodyPart::BP_Legs, 0, false);
-	ChangeBodyPart(EBodyPart::BP_Eye, 0, false);
 }
