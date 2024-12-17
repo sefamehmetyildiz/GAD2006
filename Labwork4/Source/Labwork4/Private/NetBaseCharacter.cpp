@@ -119,7 +119,7 @@ void ANetBaseCharacter::ChangeBodyPart(EBodyPart index, int value, bool DirectSe
 	}
 	else
 	{
-		CurrentIndex = Num;
+		CurrentIndex %= Num;
 	}
 
 	PartSelection.Indices[static_cast<int>(index)] = CurrentIndex;
